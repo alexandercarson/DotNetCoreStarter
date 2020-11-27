@@ -2,10 +2,10 @@
 
 name: CI
 env:
-  IS_NODE_ENABLED: ${{ true }}
+  IS_NODE_ENABLED: ${{ false }}
   IS_DOTNET_ENABLED: ${{ true }}
   IS_TESTS_DOTNET_ENABLED: ${{ true }}
-  LAUNCH_HTTPS: ${{ false }}
+  LAUNCH_HTTPS: ${{ true }}
   ENV_TYPE: ${{ 'azure' }}
 
  
@@ -47,18 +47,4 @@ jobs:
         continue-on-error: false
         if: ${{ env.IS_DOTNET_ENABLED }}
         run: dotnet build Sabio.Starter.Core.sln --configuration Release --no-restore
-        
-      # ----------------------------------------------
-      - name: Install dependencies Console App
-        working-directory: dotnet
-        continue-on-error: false
-        if: ${{ env.IS_DOTNET_ENABLED }}
-        run: dotnet restore Sabio.Db.ConsoleApp.sln
-      
-      # ----------------------------------------------
-      - name: Build Console App
-        working-directory: dotnet
-        continue-on-error: false
-        if: ${{ env.IS_DOTNET_ENABLED }}
-        run: dotnet build Sabio.Db.ConsoleApp.sln --configuration Release --no-restore
   
